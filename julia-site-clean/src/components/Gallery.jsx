@@ -4,8 +4,8 @@ import { useReveal } from '../hooks/useReveal';
 
 const photos = [
   { src: '/imgs/julia_selfie.jpg', phrase: 'seus olhos brilham mais do que qualquer estrela, qualquer supernova', tall: false },
-  { src: '/imgs/julia_red.jpg', phrase: 'perfeita em todos os seus detalhes — são incontáveis', tall: true },
-  { src: '/imgs/julia_smile.jpg', phrase: 'seu sorriso transmite luz, segurança e um significado tão intenso', tall: false },
+  { src: '/imgs/casal_crepe.jpg', phrase: 'até comendo crepe você me rouba o coração', tall: true },
+  { src: '/imgs/casal_carro.jpg', phrase: 'até nos momentos simples, ao seu lado é onde eu quero estar', tall: false },
   { src: '/imgs/julia_glasses.jpg', phrase: 'tu és um anjo do mais alto escalão, espalhando paz em todo o seu caminho', tall: false },
   { src: '/imgs/julia_mirror.jpg', phrase: 'verdadeiramente divina em todos os sentidos', tall: true },
   { src: '/imgs/julia_white.jpg', phrase: 'eu dedico a minha vida ao ser deslumbrante que você é', tall: false },
