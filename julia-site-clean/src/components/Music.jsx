@@ -6,26 +6,26 @@ const songs = [
   {
     song: 'Aliança',
     artist: 'Tribalistas',
-    spotifyId: '2E6Ha5lBkFoRKCJGVa4sxS',
+    spotifyId: '1eFlkymohjGtRnnYGabg8s',
     special: false,
   },
   {
     song: 'Infinity',
-    artist: 'James Young',
-    spotifyId: '0N0KDn7GHbYLCMJPLyFkHb',
+    artist: 'Jaymes Young',
+    spotifyId: '1SOClUWhOi8vHZYMz3GluK',
     special: false,
   },
   {
     song: 'Eu Não Valho Nada',
-    artist: 'Lagum',
-    spotifyId: '2AK5unmTHxqYHqcOEhBsKh',
+    artist: 'Lagum, Cynthia Luz',
+    spotifyId: '4sbgfWRiXGmeaR1vCWvBx6',
     special: true,
     note: 'eu não valho nada... mas com você eu valho tudo!',
   },
   {
     song: 'Equalize',
     artist: 'Pitty',
-    spotifyId: '4U45aEWtQhrm6Tu3sknEFm',
+    spotifyId: '6MSDT7tFtd6dSdwSYZcfvJ',
     special: false,
   },
 ];
