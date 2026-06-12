@@ -31,10 +31,10 @@ const songs = [
 ];
 
 export default function Music() {
-  const [playing, setPlaying] = useState(null);
+  const [open, setOpen] = useState(null);
   const title = useReveal();
 
-  const toggle = (id) => setPlaying(prev => prev === id ? null : id);
+  const toggle = (id) => setOpen(prev => prev === id ? null : id);
 
   return (
     <section style={{ position: 'relative', zIndex: 1, padding: '7rem 2rem', background: '#180808' }}>
@@ -65,42 +65,35 @@ export default function Music() {
             transition={{ duration: 0.8, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
             style={{
               background: s.special ? 'rgba(201,169,110,0.06)' : 'rgba(255,255,255,0.035)',
-              border: `1px solid ${playing === s.spotifyId ? 'rgba(192,57,43,0.7)' : s.special ? 'rgba(201,169,110,0.35)' : 'rgba(139,26,26,0.22)'}`,
+              border: `1px solid ${open === s.spotifyId ? 'rgba(192,57,43,0.7)' : s.special ? 'rgba(201,169,110,0.35)' : 'rgba(139,26,26,0.22)'}`,
               overflow: 'hidden',
               transition: 'border-color 0.3s',
             }}
           >
-            {/* Card header — clickable */}
+            {/* Header row — click to expand */}
             <motion.div
               onClick={() => toggle(s.spotifyId)}
               whileHover={{ background: 'rgba(192,57,43,0.08)' }}
               style={{
-                padding: '1.3rem 1.8rem',
-                display: 'flex', alignItems: 'center', gap: '1.4rem',
-                cursor: 'pointer', position: 'relative',
+                padding: '1.2rem 1.8rem',
+                display: 'flex', alignItems: 'center', gap: '1.2rem',
+                cursor: 'pointer', position: 'relative', userSelect: 'none',
               }}
             >
-              {/* Left accent bar */}
+              {/* Left accent */}
               <div style={{
                 position: 'absolute', left: 0, top: 0, bottom: 0, width: '3px',
                 background: s.special ? '#c9a96e' : '#8B1A1A',
               }} />
 
-              {/* Play/pause icon */}
-              <motion.div
-                animate={playing === s.spotifyId ? { scale: [1, 1.15, 1] } : { scale: 1 }}
-                transition={{ duration: 0.8, repeat: playing === s.spotifyId ? Infinity : 0 }}
-                style={{
-                  width: '40px', height: '40px', borderRadius: '50%',
-                  background: playing === s.spotifyId ? '#c0392b' : 'rgba(139,26,26,0.4)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  flexShrink: 0, fontSize: '1rem', color: '#fff',
-                  border: '1px solid rgba(192,57,43,0.4)',
-                  transition: 'background 0.3s',
-                }}
+              {/* Chevron */}
+              <motion.span
+                animate={{ rotate: open === s.spotifyId ? 90 : 0 }}
+                transition={{ duration: 0.3 }}
+                style={{ color: '#c0392b', fontSize: '0.9rem', minWidth: '14px', display: 'inline-block' }}
               >
-                {playing === s.spotifyId ? '⏸' : '▶'}
-              </motion.div>
+                ▶
+              </motion.span>
 
               <div style={{ flex: 1 }}>
                 <p style={{
@@ -108,27 +101,28 @@ export default function Music() {
                   fontSize: '1.25rem', color: '#fff', fontWeight: 400,
                 }}>
                   {s.song}
+                  {s.special && <span style={{ color: '#c9a96e', marginLeft: '0.5rem', fontSize: '0.9rem' }}>✦</span>}
                 </p>
                 <p style={{
                   fontFamily: "'Jost', sans-serif", fontWeight: 200,
                   fontSize: '0.78rem', color: 'rgba(253,246,240,0.45)',
-                  letterSpacing: '0.1em', marginTop: '0.2rem',
+                  letterSpacing: '0.1em', marginTop: '0.15rem',
                 }}>
                   {s.artist}
                 </p>
-                {s.note && (
+                {s.note && open !== s.spotifyId && (
                   <p style={{
                     fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-                    fontSize: '0.88rem', color: '#c9a96e', marginTop: '0.4rem',
+                    fontSize: '0.85rem', color: '#c9a96e', marginTop: '0.3rem',
                   }}>
                     {s.note}
                   </p>
                 )}
               </div>
 
-              {/* Animated bars when playing */}
-              {playing === s.spotifyId && (
-                <div style={{ display: 'flex', alignItems: 'flex-end', gap: '3px', height: '20px' }}>
+              {/* Animated eq bars when open */}
+              {open === s.spotifyId && (
+                <div style={{ display: 'flex', alignItems: 'flex-end', gap: '3px', height: '18px', marginRight: '0.5rem' }}>
                   {[0.5, 0.9, 0.65, 1.1, 0.75].map((dur, j) => (
                     <motion.div
                       key={j}
@@ -141,18 +135,20 @@ export default function Music() {
               )}
             </motion.div>
 
-            {/* Spotify embed — expands when playing */}
-            <AnimatePresence>
-              {playing === s.spotifyId && (
+            {/* Spotify embed — expands smoothly */}
+            <AnimatePresence initial={false}>
+              {open === s.spotifyId && (
                 <motion.div
+                  key="embed"
                   initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
+                  animate={{ height: 160, opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                   style={{ overflow: 'hidden' }}
                 >
-                  <div style={{ padding: '0 1.2rem 1.2rem' }}>
+                  <div style={{ padding: '0 1rem 1rem' }}>
                     <iframe
+                      key={s.spotifyId}
                       src={`https://open.spotify.com/embed/track/${s.spotifyId}?utm_source=generator&theme=0`}
                       width="100%"
                       height="152"
