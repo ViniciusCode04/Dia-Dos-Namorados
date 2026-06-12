@@ -87,9 +87,10 @@ export default function FirstDate() {
             fontSize: '0.95rem', lineHeight: 1.9,
             color: 'rgba(253,246,240,0.72)',
           }}>
-            Cada detalhe desse dia ficou gravado na minha memória. 
-            Foi quando percebi que você era diferente de tudo que eu já tinha conhecido — 
-            e que eu queria conhecer cada detalhe seu pelo resto da vida.
+            Cada detalhe desse dia ficou gravado na minha memória para sempre. 
+            Foi quando verdadeiramente pude perceber que era com você, meu amor, 
+            que eu queria passar o resto de toda a eternidade — pois você me completa 
+            de um jeito que nada mais nesse mundo consegue.
           </p>
           <div style={{
             marginTop: '2.5rem', paddingTop: '2rem',
